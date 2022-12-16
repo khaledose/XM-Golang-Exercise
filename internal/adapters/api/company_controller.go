@@ -46,11 +46,13 @@ func (cc *CompanyController) handleGetCompany(w http.ResponseWriter, r *http.Req
 	companyId, err := uuid.Parse(chi.URLParam(r, "id"))
 	if err != nil {
 		cc.log.Errorf("Error while trying to parse id from url, with error: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
 	company, err := cc.CompanyService.GetCompany(companyId)
 	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
 		panic(err)
 	}
 
@@ -68,6 +70,7 @@ func (cc *CompanyController) handleAddCompany(w http.ResponseWriter, r *http.Req
 	err := json.NewDecoder(r.Body).Decode(&companyRequest)
 	if err != nil {
 		cc.log.Errorf("Error while trying to decode: %s, with error: %s", companyRequest, err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
@@ -83,6 +86,7 @@ func (cc *CompanyController) handleUpdateCompanyStatus(w http.ResponseWriter, r 
 	companyId, err := uuid.Parse(chi.URLParam(r, "id"))
 	if err != nil {
 		cc.log.Errorf("Error while trying to parse id from url, with error: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
@@ -91,6 +95,7 @@ func (cc *CompanyController) handleUpdateCompanyStatus(w http.ResponseWriter, r 
 	err = json.NewDecoder(r.Body).Decode(&companyStatus)
 	if err != nil {
 		cc.log.Errorf("Error while trying to decode: %s, with error: %s", companyStatus, err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
@@ -98,6 +103,7 @@ func (cc *CompanyController) handleUpdateCompanyStatus(w http.ResponseWriter, r 
 
 	err = cc.CompanyService.UpdateCompanyStatus(companyId, companyStatus)
 	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
 		panic(err)
 	}
 
@@ -108,6 +114,7 @@ func (cc *CompanyController) handleUpdateCompany(w http.ResponseWriter, r *http.
 	companyId, err := uuid.Parse(chi.URLParam(r, "id"))
 	if err != nil {
 		cc.log.Errorf("Error while trying to parse id from url, with error: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
@@ -116,6 +123,7 @@ func (cc *CompanyController) handleUpdateCompany(w http.ResponseWriter, r *http.
 	err = json.NewDecoder(r.Body).Decode(&companyRequest)
 	if err != nil {
 		cc.log.Errorf("Error while trying to decode: %s, with error: %s", companyRequest, err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
@@ -123,6 +131,7 @@ func (cc *CompanyController) handleUpdateCompany(w http.ResponseWriter, r *http.
 
 	err = cc.CompanyService.UpdateCompany(companyId, companyRequest)
 	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
 		panic(err)
 	}
 
@@ -133,11 +142,13 @@ func (cc *CompanyController) handleDeleteCompany(w http.ResponseWriter, r *http.
 	companyId, err := uuid.Parse(chi.URLParam(r, "id"))
 	if err != nil {
 		cc.log.Errorf("Error while trying to parse id from url, with error: %s", err)
+		w.WriteHeader(http.StatusBadRequest)
 		panic(err)
 	}
 
 	err = cc.CompanyService.DeleteCompany(companyId)
 	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
 		panic(err)
 	}
 
