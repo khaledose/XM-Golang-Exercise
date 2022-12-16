@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: xm-database
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=pg
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=crud
+    ports:
+      - 8080:5432
+    volumes:
+      - db:/var/lib/postgresql/data 
+
+volumes:
+  db:

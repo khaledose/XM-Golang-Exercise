@@ -1,0 +1,17 @@
+{
+    "server": {
+        "port": 8000,
+        "secret": "hf83y4grt923847g9384fghuyhfbquy4gh9837hrq8hfq3984yfhuhfbasdfg9q3847rg3yfb9rfgwodf9123r2hfb9rgfb"
+    },
+    "database": {
+        "dsn": "postgres://pg:pass@host.docker.internal:8080/crud"
+    },
+    "kafka": {
+        "servers": "pkc-lzvrd.us-west4.gcp.confluent.cloud:9092",
+        "security-protocol": "SASL_SSL",
+        "sasl-mechanisms": "PLAIN",
+        "user": "Q7KBXP6SR3NEMYAX",
+        "pass": "zBvxmk2uk8l7s34mnIiWWwN81IvSQF+aRParBtjbPvmiFl6dsDChz52sBJ5asCLU",
+        "client-name": "xm.com"
+    }
+}
